@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="/static/app.css">
+  <script src="http://unpkg.com/jquery"></script>
+</head>
+<body>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  <section class="messages">
+    {% for category,msg in messages %}
+    <p class="{{category}}">{{msg}}</p>
+    {% endfor  %}
+  </section>
+  {% endif %}
+  {% endwith %}
+    {% block content %}
+    {% endblock %}
+    <br>
+    <br>
+    <br>
+
+  <footer>Copyright by GiovannyCode.</footer>
+  <script src="http://unpkg.com/jquery"></script>
+  <script src="http://unpkg.com/axios/dist/axios.js"></script>
+  <script type="text/javascript" src="/static/app.js"></script>
+</body>
+
+</html>

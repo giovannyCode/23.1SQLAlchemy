@@ -1,0 +1,54 @@
+
+
+{% extends 'base.html' %}
+
+{% block title %}User Detail{% endblock %}
+
+{% block content %}
+
+<h1>User Detail</h1>
+
+<div class="center-user-card">
+  <div class="user-card">
+    <a href="http://127.0.0.1:3000/"><button type="button" class="back-button" id="back-button">Back to main menu</button></a>
+      <div class="user-image">
+          <!-- Placeholder image, replace with the actual image source -->
+          <img src="{{user.image}}" alt="User Image">
+      </div>
+
+      <p><strong>First Name:</strong> {{user.first_name}}</p>
+      <p><strong>Last Name:</strong> {{user.last_name}}</p>
+      
+      <button type="button" class="delete-button" id="delete-button" value="{{user.id}}">Delete user</button>
+     <a href="/update/{{user.id}}"> <button type="button" class="update-button" id="update-button">Update user</button></a>
+       
+      
+  </div>
+  
+</div>
+
+ 
+  
+{% endblock %}
+
+<script>
+  document.getElementById("delete-button").addEventListener("click",deleteUser);
+
+async function  deleteUser()
+{
+
+  const user_id = document.getElementById("delete-button").value;
+  const res = await axios.delete('/delete/', { data: { user_id: user_id } });
+  console.log(res.data)
+  if(res.data =="Success")
+  {
+    alert("User has been deleted")
+    window.location.href = "http://127.0.0.1:3000/";
+  }
+  else
+  {
+    alert("there was a problem deleting the user")
+    window.location.href = "http://127.0.0.1:3000/";
+  }
+}
+</script>

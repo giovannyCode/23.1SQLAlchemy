@@ -1,0 +1,184 @@
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5vh; /* Adjust the height as needed */
+  margin-top: 10vh;
+}
+
+/* Styles for the custom button */
+.custom-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  background-color: #3498db;
+  color: #ffffff;
+  border: 2px solid #3498db;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.back-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  background-color: #34db55;
+  color: #ffffff;
+  border: 2px solid #34db55;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  background-color: #db3434;
+  color: #ffffff;
+  border: 2px solid #db3434;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.update-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  background-color: #3450db;
+  color: #ffffff;
+  border: 2px solid #3450db;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+/* Styles for the unordered list */
+.custom-list {
+  padding: 0;
+
+}
+
+/* Styles for list items inside the unordered list */
+.custom-list li {
+  font-size: 30px;
+}
+
+h1
+{
+  text-align: center;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;      
+  text-align: center;      /* Footer height */
+}
+.messages p {
+  padding: 1rem;
+  font-size: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
+  }
+.messages .success {
+  background-color: rgba(0, 255, 0, 0.1);
+  margin: 0 auto;
+  text-align: center;
+  color :green;
+  font-weight: bold;
+  }
+.messages .error {
+  background-color: rgba(255, 0, 0, 0.1);
+  margin: 0 auto;
+  text-align: center;
+  color: crimson;
+  font-weight: bold;
+  }
+
+.center-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh; /* Adjust the height as needed */
+    margin-top: 20vh; /* Adjust the top margin as needed */
+}
+
+/* Styles for the form */
+form {
+    width: 300px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles for form inputs and labels */
+label {
+    margin-bottom: 8px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+/* Style the submit button */
+input[type="submit"] {
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+/* Style the file input */
+input[type="file"] {
+    margin-top: 10px;
+}
+
+/* Center the user card horizontally and align it to the top */
+.center-user-card {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 50vh; /* Adjust the height as needed */
+  margin-top: 20vh; /* Adjust the top margin as needed */
+}
+
+/* Styles for the user card */
+.user-card {
+  width: 300px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Style for the user image */
+.user-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 15px;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}

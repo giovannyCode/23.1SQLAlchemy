@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}{{survey_tittle}}{% endblock %}
+
+{% block content %}
+
+<h1>Users</h1>
+
+<div class="center-container">
+  <div>
+     
+      <ul class="custom-list">
+        {% for user in users %}
+        <li ><a href="showuser/{{user.id}}">{{user.first_name}} {{user.last_name}} </a></li>
+        {% endfor %}
+      </ul>
+<br>
+<br>
+      <a href="/createuser" class="custom-button">Add User</a>
+  </div>
+  
+</div>
+ 
+{% endblock %}

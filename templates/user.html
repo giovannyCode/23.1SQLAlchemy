@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}{{survey_tittle}}{% endblock %}
+
+{% block content %}
+
+<h1>Users</h1>
+
+<div class="center-form">
+  <form action="/createuser" method="POST">
+      <label for="first_name">First Name:</label>
+      <input type="text" id="first_name" name="first_name" required>
+
+      <label for="last_name">Last Name:</label>
+      <input type="text" id="last_name" name="last_name" required>
+
+      <label for="image">Image:</label>
+      <input type="text" id="image" name="image"  required>
+
+      <input type="submit" value="Submit">
+  </form>
+</div>
+   
+ 
+  
+{% endblock %}
