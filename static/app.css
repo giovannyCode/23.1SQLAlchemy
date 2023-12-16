@@ -182,3 +182,13 @@ img {
   max-width: 100%;
   max-height: 100%;
 }
+
+#userImage
+{
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 15px;
+
+}

@@ -8,24 +8,50 @@
 
 <h1>User Detail</h1>
 
-<div class="center-user-card">
-  <div class="user-card">
-    <a href="http://127.0.0.1:3000/"><button type="button" class="back-button" id="back-button">Back to main menu</button></a>
-      <div class="user-image">
-          <!-- Placeholder image, replace with the actual image source -->
-          <img src="{{user.image}}" alt="User Image">
+<div class="container mt-5">
+  <div class="card">
+    <div class="d-flex justify-content-center">
+      <a href="http://127.0.0.1:3000/"><button type="button" class="btn btn-info" id="back-button">Back to main menu</button></a>
+  </div>
+   <br>
+      <img src="{{user.image}}" class="card-img-top img-fluid" alt="User Image" id ="userImage">
+      <div class="card-body">
+          <h5 class="card-title" id="userName">{{user.first_name}}</h5>
+          <p class="card-text" id="userLastName">{{user.last_name}}</p>
       </div>
-
-      <p><strong>First Name:</strong> {{user.first_name}}</p>
-      <p><strong>Last Name:</strong> {{user.last_name}}</p>
-      
-      <button type="button" class="delete-button" id="delete-button" value="{{user.id}}">Delete user</button>
-     <a href="/update/{{user.id}}"> <button type="button" class="update-button" id="update-button">Update user</button></a>
-       
+      <ul class="list-group list-group-flush">
+          <li class="list-group-item"><strong>First Name:</strong> <span id="firstName">{{user.first_name}}</span></li>
+          <li class="list-group-item"><strong>Last Name:</strong> <span id="lastName">{{user.last_name}}</span></li>
+      </ul>
       
   </div>
+  <br>
+  <div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-danger mr-2" id="delete-button" value="{{user.id}}">Delete user</button> 
+  <a href="/update/{{user.id}}"  class="btn btn-success ml-2" id="update-button"> Update user</a>
+</div>
+  
   
 </div>
+
+<div class="container mt-5">
+  <h1>Posts</h1>
+
+  <div class="d-flex justify-content-center">
+  <a href="/users/{{user.id}}/posts/new" class="btn btn-primary">Add</a>
+  </div>
+  <br> 
+    <div class="list-group">
+      {% for post in user.post %}
+    <a href="/posts/{{post.id}}" class="list-group-item list-group-item-action list-group-item-light" > {{post.tittle}} </a>
+    {% endfor %}
+    
+   </div>
+
+    
+</div>
+<br>
+
 
  
   
