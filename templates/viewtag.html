@@ -1,0 +1,46 @@
+
+{% extends 'base.html' %}
+
+{% block title %}View Tag {% endblock %}
+
+{% block content %}
+
+<h1>View  Tag</h1>
+<br>
+<br>
+<br>
+
+<div class="container d-flex align-items-center justify-content-center">
+  <div class="text-center">
+    <div class="mb-3">
+     <h1> {{tag.name}}</h1>
+    </div>          
+  </div>
+</div> 
+
+<div class="text-center">
+  <ol class="list-group">
+    {% for post in tag.posts %}
+          <li class="list-group-item"> {{post.tittle}} </li>
+        {% endfor %}
+  </ol>
+  </div>
+   
+  <div class ="container d-flex align-items-center justify-content-center">
+    <div class="text-center">
+          
+      <form action="/tags/{{tag.id}}/delete"  method="POST"  >
+        <a href="/tags" class="m-3 btn btn-secondary">Cancel</a>
+        <a href="/tags/{{tag.id}}/edit" class="m-3 btn btn-primary">Edit</a>
+        <button type="submit" class="m-3 btn btn-danger">Delete</button>
+      </form>
+</div>
+
+  </div> 
+ 
+ 
+ 
+  
+
+
+{% endblock %}

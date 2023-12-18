@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, redirect,flash, session ,json,jsonify
-from models import db, connect_db, User, Post
+from models import db, connect_db, User, Post, Tag
 from flask_debugtoolbar import DebugToolbarExtension
 
 
@@ -11,9 +11,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 connect_db(app)
-""" db.drop_all()
-db.create_all()
- """
+"""db.drop_all()
+db.create_all()"""
+ 
 @app.route("/")
 def home_page():
   users =User.query.all()
@@ -75,13 +75,20 @@ def show_form_to_add_a_post  (user_id):
   userid = user_id
   user = User.query.get_or_404(user_id)
   user_name = f"{user.first_name} {user.last_name}"
-  return render_template("postform.html",userid=userid, user_name = user_name) 
+  tags =  tags = Tag.query.all()
+  return render_template("postform.html",userid=userid, user_name = user_name, tags =tags) 
 
 @app.route("/users/<int:user_id>/posts/new",methods=["POST"])
 def add_post  (user_id):
   tittle = request.form['tittle']
   content = request.form['content']
-  post = Post(tittle=tittle, content=content, user_id=user_id)
+  tags = request.form.getlist('tags')
+  tagList =[]
+
+  for tag_id in tags:
+      tag = Tag.query.get_or_404(tag_id)
+      tagList.append(tag)
+  post = Post(tittle=tittle, content=content, user_id=user_id, tags = tagList)
   db.session.add(post)
   db.session.commit()
   print(f"Post  created  with id {post.id}")
@@ -96,13 +103,22 @@ def show_post  (post_id):
 @app.route("/posts/<int:post_id>/edit",methods=["GET"])
 def show_post_edit  (post_id):
    post = Post.query.get_or_404(post_id)
-   return render_template("postedit.html", post=post) 
+   tags = Tag.query.all()
+   return render_template("postedit.html", post=post, tags =tags) 
 
 @app.route("/posts/<int:post_id>/edit",methods=["POST"])
 def edit_post  (post_id):
    post = Post.query.get_or_404(post_id)
    post.tittle = request.form['tittle']
    post.content = request.form['content']
+   tags = request.form.getlist('tags')
+   tagList =[]
+
+   for tag_id in tags:
+      tag = Tag.query.get_or_404(tag_id)
+      tagList.append(tag)
+ 
+   post.tags = tagList
    db.session.add(post)
    db.session.commit()
    user = User.query.get_or_404(post.user_id)
@@ -119,3 +135,57 @@ def delete_post  (post_id):
     db.session.commit()
     flash(f"Post id  {post_id} has  been deleted", 'success')
     return render_template("userdetail.html", user=user)
+
+
+@app.route("/tags",methods=["GET"])
+def list_all_tags ():
+   """List all tags"""
+   tags =Tag.query.all()
+   return render_template("tags.html", tags=tags)
+
+@app.route("/tags/<int:tag_id>",methods=["GET"])
+def show_tag_detail  (tag_id):
+   tag = Tag.query.get_or_404(tag_id)
+   return render_template("viewtag.html", tag=tag)
+
+@app.route("/tags/new",methods=["GET"])
+def create_a_tag_get  ():
+    tags = Tag.query.all()
+    return render_template("createtag.html", tags = tags)
+
+@app.route("/tags/new",methods=["POST"])
+def create_a_tag_post  ():
+    name = request.form['name']
+    tag = Tag(name=name)
+    db.session.add(tag)
+    db.session.commit()
+    flash(f"Tag {tag.name} has  been created", 'success')
+    return redirect(f"/tags")
+
+@app.route("/tags/<int:tag_id>/edit",methods=["GET"])
+def edit_tag_get (tag_id):
+   tag = Tag.query.get_or_404(tag_id)
+   return render_template("edittag.html", tag=tag)
+
+@app.route("/tags/<int:tag_id>/edit",methods=["POST"])
+def edit_tag_Post (tag_id):
+   print("I am in edit tag")
+   tag = Tag.query.get_or_404(tag_id)
+   name = request.form['name']
+   tag.name = name;
+   db.session.add(tag)
+   db.session.commit()
+   flash(f"Tag {tag.name} has  been edited", 'success')
+   return redirect(f"/tags")
+
+@app.route("/tags/<int:tag_id>/delete",methods=["POST"])
+def delete_tag  (tag_id):
+    """Delete a tag."""
+    tag = Tag.query.get_or_404(tag_id)
+    db.session.delete(tag)
+    db.session.commit()
+    flash(f"Post id  {tag_id} has  been deleted", 'success')
+    return redirect(f"/tags")
+
+
+
